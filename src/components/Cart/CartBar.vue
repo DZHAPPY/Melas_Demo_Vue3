@@ -1,18 +1,24 @@
 <script setup>
+    import Mask from "../UI/Mask.vue"
     import cartBag from "../../assets/bag.png"
     import { useMealsStore } from "../../store/meals";
+    import { ref } from "vue";
     const Meals = useMealsStore()
+    const showDetails = ref(false)
 </script>
 <template>
-    <div class="cart-bar">
+    <Mask :is-show="showDetails" @click="showDetails = !showDetails">
+        
+    </Mask>
+    <div class="cart-bar" @click="Meals.totalCount > 0 ? showDetails = true:0">
         <div class="cart-bag">
             <img :src="cartBag" alt="">
             <span class="total-count">{{ Meals.totalCount }}</span>
         </div>
 
         <div class="total-amount">
-            <!-- <p class="no-goods">未选择商品</p> -->
-            <p class="has-goods">{{ Meals.totalPrice }}</p>
+            <p class="no-goods" v-show="Meals.totalCount == 0">未选择商品</p>
+            <p class="has-goods" v-show="Meals.totalCount > 0">{{ Meals.totalPrice }}</p>
         </div>
         <button class="checkout">去结算</button>
     </div>
@@ -29,6 +35,7 @@
     margin: 0 auto;
     background-color: rgb(58,58,58);
     border-radius: 50rem;
+    z-index: 20;
 }
 
 .cart-bag{
@@ -37,6 +44,11 @@
     bottom: -10rem;
 }
 .total-count{
+    width: 45rem;
+    height: 45rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
     background: rgb(255, 71, 71);
     position: absolute;
