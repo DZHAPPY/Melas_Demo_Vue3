@@ -59,6 +59,24 @@ export const useMealsStore = defineStore('Meals',{
     getters:{
         filterMeals:state => {
             return state.data.filter(item => item.title.indexOf(state.keyWord) != -1)
+        },
+        
+        // 获取购物车中的商品
+        cartMeals:(state)=>{
+            return state.data.filter(item => item.count > 0)
+        },
+
+        // 获取购物车中商品总数
+        totalCount:(state)=>{
+            if(state.cartMeals.length <= 0) return 0
+            return state.cartMeals.reduce((result,item) => result + item.count,0)
+        },
+
+        // 获取商品中的总价格
+        totalPrice:(state)=>{
+            if(state.cartMeals.length <= 0) return 0
+
+            return state.cartMeals.reduce((result,item) => result + item.count * item.price,0)
         }
     },
 
@@ -69,6 +87,7 @@ export const useMealsStore = defineStore('Meals',{
             }
             meal.count ++
         },
+
         subMealFromCart(meal){
             meal.count--
         }
