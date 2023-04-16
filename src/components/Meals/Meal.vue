@@ -15,7 +15,7 @@
             </div>
             <div class="price_btn">
                 <span class="price">{{ props.meal.price }}</span>
-                <Counter></Counter>
+                <Counter :meal="props.meal"></Counter>
             </div>
         </div>
 

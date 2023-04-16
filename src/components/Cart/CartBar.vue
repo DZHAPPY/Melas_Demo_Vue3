@@ -71,6 +71,6 @@
     border-radius: 50rem;
     font-size: 30rem;
     font-weight: 700;
-    background-color: rgb(234,178,0);
+    background-color: rgb(248,188,0);
 }
 </style>

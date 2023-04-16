@@ -60,5 +60,17 @@ export const useMealsStore = defineStore('Meals',{
         filterMeals:state => {
             return state.data.filter(item => item.title.indexOf(state.keyWord) != -1)
         }
+    },
+
+    actions:{
+        addMealToCart(meal){
+            if(isNaN(meal.count)){
+                meal.count = 0
+            }
+            meal.count ++
+        },
+        subMealFromCart(meal){
+            meal.count--
+        }
     }
 })
